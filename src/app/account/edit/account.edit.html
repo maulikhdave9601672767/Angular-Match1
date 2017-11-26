@@ -1,0 +1,97 @@
+<div class="container margin-top-54">
+  <h3>Add/Edit Account Details</h3>
+  <form name="editaccountdetailsform" class="col-sm-12" ng-class="{ 'has-error': vm.failed }" novalidate autocomplete="off">
+    <p class="help-block" ng-if="vm.failed">
+      Something went wrong, please try again or contact administrator.
+    </p>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="departmentnametxtbox" class="form-control-label"> Account Name <span class="asteriskcolor">*</span></label>
+          <input name="accountName" type="text" class="form-control" placeholder="Account Name e.g, State Bank of India" ng-minlength="2"
+            ng-maxlength="50" ng-required="true" ng-model="vm.accountdetails.accoutName" />
+          <p class="help-block" ng-if="editaccountdetailsform.accountName.$dirty && editaccountdetailsform.accountName.$error.minlength">
+            <i><b>Account Name</b></i> should be at least 2 characters long.
+          </p>
+          <p class="help-block" ng-if="editaccountdetailsform.accountName.$dirty && editaccountdetailsform.accountName.$error.maxlength">
+            <i><b>Account Name</b></i> should not be more than 100 characters long.
+          </p>
+          <p class="help-block" ng-if="(editaccountdetailsform.accountName.$dirty || editaccountdetailsform.accountName.$touched) && editaccountdetailsform.accountName.$error.required">
+            <i><b>Account Name</b></i> is required.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="accountNumber" class="form-control-label"> Account Number</label>
+          <input name="accountNumber" type="text" class="form-control" placeholder="Account Number e.g, 63548907345" ng-minlength="2"
+            ng-maxlength="50" ng-model="vm.accountdetails.accountNumber" />
+          <!-- <p class="help-block" ng-if="editaccountdetailsform.accountNumber.$dirty && editaccountdetailsform.accountNumber.$error.minlength">
+        <i><b>Account Number</b></i> should be at least 2 characters long.
+      </p>
+      <p class="help-block" ng-if="editaccountdetailsform.accountNumber.$dirty && editaccountdetailsform.accountNumber.$error.maxlength">
+        <i><b>Account Number</b></i> should not be more than 100 characters long.
+      </p>
+      <p class="help-block" ng-if="(editaccountdetailsform.accountNumber.$dirty || editaccountdetailsform.accountNumber.$touched) && editaccountdetailsform.accountNumber.$error.required">
+        <i><b>Account Number</b></i> is required.
+      </p> -->
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="phoneNumber" class="form-control-label"> Phone Number </label>
+          <input name="phoneNumber" type="text" class="form-control" placeholder="Phone Number e.g, 011-29876655" ng-model="vm.accountdetails.phoneNumber"
+          />
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="address" class="form-control-label"> Address </label>
+          <input name="address" type="text" class="form-control" placeholder="Address e.g, MG Road Branch" ng-model="vm.accountdetails.address"
+          />
+        </div>
+      </div>
+    </div>
+    
+      
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="description" class="form-control-label"> Description</label>
+          <textarea name="description" ng-maxlength="800" id="description" rows="6" class="form-control"  ng-model="vm.accountdetails.description"></textarea>
+          <p class="help-block" ng-if="editaccountdetailsform.description.$dirty && editaccountdetailsform.description.$error.maxlength">
+            Description should be less than 800 character.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="description" class="form-control-label"> Active</label>
+          <input type="checkbox" ng-model="vm.accountdetails.isActive">
+        </div>
+      </div>
+    </div> -->
+    <div class="row">
+      <div class="col-sm-12">
+        <button class="btn btn-success" ng-click="vm.save(editaccountdetailsform)">
+                        Save
+                    </button>
+        <a class="btn btn-danger" back>Cancel</a>
+      </div>
+      <br />
+      <br>
+      <br>
+  </form>
+  </div>

@@ -1,0 +1,99 @@
+<div class="container margin-top-54">
+  <h3>Add/Edit Transaction Details</h3>
+  <form name="edittransactionform" class="col-sm-12" ng-class="{ 'has-error': vm.failed }" novalidate autocomplete="off">
+    <p class="help-block" ng-if="vm.failed">
+      Something went wrong, please try again or contact administrator.
+    </p>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="acoountname" class="form-control-label"> Select Account Name <span class="asteriskcolor">*</span></label>
+          <select name="acoountname" class="form-control" ng-options="acc.accountDetailsId as acc.accoutName for acc in vm.accountlist"
+            ng-model="vm.transaction.accountDetailsId" ng-required="true">
+         <option value="">---Please select---</option>
+       </select>
+          <p class="help-block" ng-if="(edittransactionform.acoountname.$dirty || edittransactionform.acoountname.$touched) && edittransactionform.acoountname.$error.required">
+            <i><b>Account Name</b></i> is required.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="transactiontype" class="form-control-label">Select Transaction Type <span class="asteriskcolor">*</span></label>
+          <select name="transactiontype" class="form-control" ng-model="vm.transaction.transactionType" ng-required="true">
+            <option value="">---Please select---</option>
+            <option value="Expense">Expense </option>
+            <option value="Income">Income</option>
+          </select>
+          <p class="help-block" ng-if="(edittransactionform.transactiontype.$dirty || edittransactionform.transactiontype.$touched) && edittransactionform.transactiontype.$error.required">
+            <i><b>Transaction Type</b></i> is required.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="acoountname" class="form-control-label"> Select Work Type <span class="asteriskcolor">*</span></label>
+          <select name="worktype" class="form-control" ng-options="wrktyp.workTypeId as wrktyp.workTypeName for wrktyp in vm.workTypelist"
+            ng-model="vm.transaction.workTypeId" ng-required="true">
+           <option value="">---Please select---</option>
+         </select>
+          <p class="help-block" ng-if="(edittransactionform.worktype.$dirty || edittransactionform.worktype.$touched) && edittransactionform.worktype.$error.required">
+            <i><b>Work Type</b></i> is required.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="amount" class="form-control-label"> Amount<span class="asteriskcolor">*</span></label>
+          <input name="amount" type="text" class="form-control" placeholder="e.g., 462021" ng-required="true" ng-model="vm.transaction.amount"
+            ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" />
+          <p class="help-block" ng-if="edittransactionform.amount.$dirty && edittransactionform.amount.$error.pattern">
+            Invalid <i><b>Amount.</b></i>
+          </p>
+          <p class="help-block" ng-if="(edittransactionform.amount.$dirty || edittransactionform.amount.$touched) && edittransactionform.amount.$error.required && !edittransactionform.amount.$error.pattern">
+            <i><b>Amount</b></i> is required.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="description" class="form-control-label"> Notes</label>
+              <textarea name="description" ng-maxlength="800" id="description" rows="6" class="form-control"  ng-model="vm.transaction.description"></textarea>
+              <p class="help-block" ng-if="edittransactionform.description.$dirty && edittransactionform.description.$error.maxlength">
+                Notes should be less than 800 character.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="description" class="form-control-label"> Active</label>
+              <input type="checkbox" ng-model="vm.transaction.isActive">
+            </div>
+          </div>
+        </div> -->
+    <div class="row">
+      <div class="col-sm-12">
+        <button class="btn btn-success" ng-click="vm.save(edittransactionform)">
+                        Save
+                    </button>
+        <a class="btn btn-danger" back>Cancel</a>
+      </div>
+      <br />
+      <br>
+      <br>
+  </form>
+  </div>

@@ -1,0 +1,50 @@
+
+
+<div class="container-fluid margin-top-54" >
+
+  <div class="pull-right">
+    <a ui-sref="secure." class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add New</a>
+  </div>
+  <table class="table table-bordered table-striped" ng-if="vm.filedData.length>0">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Customer ZSN</td>
+        <td>Mobile No</td>
+        <td>Aadhar No</td>
+        <td> SSSMid </td>
+        <td>Date of Birth</td>
+        <td>Enrolled Date</td>
+        <td>Address</td>
+        <td>Payment Status</td>
+        <td>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in vm.filedData">
+        <td>{{ item.name }}</td>
+        <td>{{ item.customerzsn }}</td>
+        <td>{{ item.mobileno }}</td>
+        <td>{{ item.aadharno }}</td>
+        <td>{{ item.sssmid }}</td>
+        <td>{{ item.dob }}</td>
+        <td>{{ item.enrolledDate }}</td>
+        <td>{{ item.address }}</td>
+        <td>Status:- &nbsp;{{item.paymentStatus}}.
+          Due Date:- &nbsp;{{item.paymentdate}}</td>
+        <td>
+          <a ng-click="vm.go(item._id)" class="btn btn-info"><i class="glyphicon glyphicon-edit"></i></a>
+          <button type="button" class="btn btn-danger" ng-click="vm.delete(item.id)"><i class="glyphicon glyphicon-remove-circle"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="paddingLeft-15px">
+    Showing {{(vm.options.pageSize*vm.options.page)-vm.options.pageSize+1}} to {{(vm.options.pageSize*vm.options.page)-vm.options.pageSize+vm.filedData.length}}
+    of total {{vm.options.totalItems}} entries
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-8 col-sm-3 col-xs-12">
+    <uib-pagination total-items="vm.options.totalItems" max-size="vm.pageSize" boundary-links="true" items-per-page="vm.options.pageSize"
+      ng-model="vm.options.page" ng-change="vm.getcitizen()"></uib-pagination>
+  </div>
+</div>

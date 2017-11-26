@@ -1,0 +1,71 @@
+<div class="container  margin-top-54" >
+  <div class="pull-left">
+<h4>User List</h4>
+</div>
+  <div class="pull-right printme">
+    <a ui-sref="secure.user.edit" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add New</a>
+    <a ng-click="vm.printme()"  ng-if="vm.user.length>0" style="margin-left:10px;" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-print"></i> Print</a>
+
+  </div>
+
+  <div ng-if="vm.user.length==0"  class="row" >
+    <p class="no-records" style=""><br/>
+    <span style="padding-top:10px;">  No Record found(s).</span>
+    </p>
+  </div>
+<!-- <div class="col-md-6">
+  <select name="role" class="form-control pull-right"
+  ng-model="vm.options.pageSize">
+  <option value="10">10</option>
+  <option value="50">50</option>
+  <option value="100">100</option>
+</select>
+  </div> -->
+
+  <table class="table table-bordered table-striped" ng-if="vm.user.length>0">
+    <thead>
+      <tr>
+        <td class="thead-tr-td">
+          Name
+        </td>
+        <td class="thead-tr-td">
+          User Name
+        </td>
+        <td class="thead-tr-td">
+        Email
+        </td>
+        <td class="thead-tr-td">
+          Role
+        </td>
+
+        <td class="thead-tr-td printme">
+          Action
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in vm.user">
+        <td>{{ item.firstName+' '+item.lastName }}</td>
+        <td>{{ vm.decode(item.userName) }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ vm.decode(item.roleName) }}</td>
+
+        <td class="printme">
+          <a ng-click="vm.go(item.userId)" class="btn btn-info"><i class="glyphicon glyphicon-edit"></i></a>
+          <!-- <button type="button" class="btn btn-danger" ng-click="vm.delete(item._id)"><i class="glyphicon glyphicon glyphicon-ban-circle"></i></button> -->
+          <button type="button" class="btn btn-danger" ng-click="vm.delete(item.userId)"><i class="glyphicon glyphicon-remove-circle"></i></button>
+          <button type="button" class="btn btn-warning" ng-click="vm.changepassword(item.userId)"><i class="glyphicon glyphicon-pencil"></i></button>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="paddingLeft-15px printme" ng-if="vm.user.length>0">
+    Showing {{(vm.options.pageSize*vm.options.page)-vm.options.pageSize+1}} to {{(vm.options.pageSize*vm.options.page)-vm.options.pageSize+vm.user.length}}
+    of total {{vm.options.totalItems}} entries
+  </div>
+  <div class="printme col-lg-12 col-md-12 col-sm-8 col-sm-3 col-xs-12" ng-if="vm.user.length>0">
+    <uib-pagination total-items="vm.options.totalItems" max-size="vm.pageSize" boundary-links="true" items-per-page="vm.options.pageSize"
+      ng-model="vm.options.page" ng-change="vm.getUser()"></uib-pagination>
+  </div>
+</div>

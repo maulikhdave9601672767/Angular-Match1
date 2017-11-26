@@ -1,0 +1,43 @@
+<nav class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner" style="margin-bottom:10px;">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" ng-click="vm.navCollapsed = !vm.navCollapsed" >
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="./" class="navbar-brand"><span class="glyphicon glyphicon-home"></span>&nbsp; Transaction Management</a>
+      </div>
+      <div class="collapse navbar-collapse bs-navbar-collapse" uib-collapse="vm.navCollapsed">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a ui-sref="secure.transaction.list">Home</a>
+          </li>
+          <li ng-if="vm.user.Role=='Admin'">
+            <a ui-sref="secure.account.list">Account</a>
+          </li>
+  
+          <li ng-if="vm.user.Role=='Admin'">
+            <a ui-sref="secure.worktype.list">Work Type</a>
+          </li>
+  
+          <li ng-if="vm.user.Role=='Admin'">
+            <a ui-sref="secure.user.list">User</a>
+          </li>
+          <li class="dropdown" uib-dropdown>
+            <a href="#" class="dropdown-toggle" uib-dropdown-toggle>{{vm.user.UserName}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li style="margin: 4px 0;"></li>
+             <li><a ui-sref="secure.changepassword">Change Password</a></li>
+              <!--<li><a href="#">My Profile</a></li>-->
+              <li style="margin: 4px 0;"></li>
+              <li><a ng-click="vm.logout()">Logout</a></li>
+  
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  

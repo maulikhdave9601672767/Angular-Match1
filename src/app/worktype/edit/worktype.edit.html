@@ -1,0 +1,57 @@
+<div class="container margin-top-54" >
+<h3>Add/Edit WorkType</h3>
+<form name="editWorkTypeForm" class="col-sm-12" ng-class="{ 'has-error': vm.failed }" novalidate autocomplete="off">
+  <p class="help-block" ng-if="vm.failed" >
+      Something went wrong, please try again or contact administrator.
+    </p>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="workTypeName" class="form-control-label"> Work Type <span class="asteriskcolor">*</span></label>
+            <input name="workTypeName" type="text" class="form-control" placeholder="Work Type e.g, Outsourcing" ng-minlength="2" ng-maxlength="50"
+              ng-required="true" ng-model="vm.worktype.workTypeName" />
+            <p class="help-block" ng-if="editWorkTypeForm.workTypeName.$dirty && editWorkTypeForm.workTypeName.$error.minlength">
+              <i><b>Work Type</b></i> should be at least 2 characters long.
+            </p>
+            <p class="help-block" ng-if="editWorkTypeForm.workTypeName.$dirty && editWorkTypeForm.workTypeName.$error.maxlength">
+              <i><b>Work Type</b></i> should not be more than 50 characters long.
+            </p>
+            <p class="help-block" ng-if="(editWorkTypeForm.workTypeName.$dirty || editWorkTypeForm.workTypeName.$touched) && editWorkTypeForm.workTypeName.$error.required">
+              <i><b>Work Type</b></i> is required.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="description" class="form-control-label"> Description</label>
+                <textarea name="description" ng-maxlength="800" id="description" rows="6" class="form-control"  ng-model="vm.worktype.description"></textarea>
+                <p class="help-block" ng-if="editWorkTypeForm.description.$dirty && editWorkTypeForm.description.$error.maxlength">
+                  Description should be less than 800 character.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="description" class="form-control-label"> Active</label>
+                <input type="checkbox" ng-model="vm.worktype.isActive">
+              </div>
+            </div>
+          </div> -->
+
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-success" ng-click="vm.save(editWorkTypeForm)">
+                        Save
+                    </button>
+          <a class="btn btn-danger" back>Cancel</a>
+        </div>
+        <br />
+        <br>
+        <br>
+    </form>
+</div>

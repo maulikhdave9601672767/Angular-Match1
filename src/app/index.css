@@ -1,0 +1,86 @@
+
+.mb60{
+    margin-bottom: 60px;
+}
+h1{
+    margin-top: 60px!important;
+}
+.wrapper{
+    background: #fff;
+    box-shadow: 0 0 6px 0 #6a6a6a;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+h1 span {
+  display: block;
+  font-size: 17px;
+  font-style: italic;
+  margin-top: 10px;
+}
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+.thead-tr-td{
+  background-color: #1976D2;
+border-color: #1976D2;
+color: white;
+}
+  .browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+.thumbnail {
+  height: 200px;
+}
+
+.thumbnail img.pull-right {
+  width: 50px;
+}
+
+.margin-top-54{
+  margin-top: 54px;
+}
+.help-block{margin-top: 0px;color:#c45957;}
+
+.asteriskcolor{
+  color:#c45957;
+}
+
+.footer{
+  background: #ececec;
+  height: 54px;
+  line-height: 54px;
+  text-align: center;
+  font-size: 15px;
+  color: #000;
+  margin-top: 1px;
+  display: inherit;
+}
+body {
+    line-height: 1;
+    color: black;
+    background-image: url('../assets/images/playstation-pattern.png');
+}
+
+ .no-records{
+   color: #fff;
+   background-color: #f0ad4e;
+   border-color: #eea236; width:500px; height:50px; margin-left:400px;text-align:center;margin-top: 90px;
+ }
+@media print {
+  .printme{
+    display: none;
+  }
+}
+.operation-bar  [class*="col-md-"]{
+  padding-left: 2px;
+  padding-right: 5px;
+}

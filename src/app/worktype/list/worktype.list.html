@@ -1,0 +1,49 @@
+<div class="container  margin-top-54" >
+  <div class="pull-left">
+    <h4>WorkType List</h4>
+  </div>
+  <div class="pull-right printme">
+    <a ui-sref="secure.worktype.edit" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add New</a>
+    <a ng-click="vm.printme()"  ng-if="vm.worktype.length>0" style="margin-left:10px;" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-print"></i> Print</a>
+
+  </div>
+  <div ng-if="vm.worktype.length==0"  class="row" >
+    <p class="no-records" ><br/>
+    <span style="padding-top:10px;">No Record found(s).</span>
+  </p>
+</div>
+<div ng-if="vm.worktype.length>0">
+  <table class="table table-bordered table-striped" >
+    <thead>
+      <tr>
+        <td class="thead-tr-td">
+          Work Type Name
+        </td>
+
+        <td class="thead-tr-td printme">
+          Action
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in vm.worktype">
+        <td>{{ item.workTypeName }}</td>
+
+        <td class="printme">
+          <a ng-click="vm.go(item.workTypeId)" class="btn btn-info"><i class="glyphicon glyphicon-edit"></i></a>
+          <button type="button" class="btn btn-danger" ng-click="vm.delete(item.workTypeId)"><i class="glyphicon glyphicon-remove-circle"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="printme paddingLeft-15px" ng-if="vm.worktype.length>0">
+    Showing {{(vm.options.pageSize*vm.options.page)-vm.options.pageSize+1}} to {{(vm.options.pageSize*vm.options.page)-vm.options.pageSize+vm.worktype.length}}
+    of total {{vm.options.totalItems}} entries
+  </div>
+  <div class="printme col-lg-12 col-md-12 col-sm-8 col-sm-3 col-xs-12" >
+    <uib-pagination total-items="vm.options.totalItems" max-size="vm.pageSize" boundary-links="true" items-per-page="vm.options.pageSize"
+    ng-model="vm.options.page" ng-change="vm.getWorkType()"></uib-pagination>
+  </div>
+</div>
+
+</div>

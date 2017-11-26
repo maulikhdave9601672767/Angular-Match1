@@ -1,0 +1,77 @@
+
+<div class="container margin-top-54" >
+  <div class="pull-left">
+    <h4>AccountDetails List</h4>
+  </div>
+  <div class="pull-right printme">
+    <a ui-sref="secure.account.edit" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add New</a>
+    <a ng-click="vm.printme()"  ng-if="vm.accountdetails.length>0" style="margin-left:10px;" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-print"></i> Print</a>
+
+  </div>
+  <div ng-if="vm.accountdetails.length==0"  class="row" >
+    <p class="no-records" style=""><br/>
+    <span style="padding-top:10px;">  No Record found(s).</span>
+    </p>
+  </div>
+<div ng-if="vm.accountdetails.length>0">
+  <table class="table table-bordered table-striped" >
+    <thead>
+      <tr>
+        <td>
+          <a ng-click="vm.sortType = 'name'; vm.sortReverse = !vm.sortReverse">
+               Account Name
+                <span ng-show="vm.sortType == 'name' && !vm.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="vm.sortType == 'name' && vm.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              </a>
+        </td>
+        <td>
+          <a  ng-click="vm.sortType = 'accountnumber';vm.sortReverse=!vm.sortReverse">
+                  Account Number
+                <span ng-show="vm.sortType == 'accountnumber' && !vm.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="vm.sortType == 'accountnumber' && vm.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              </a>
+        </td>
+        <td>
+          <a  ng-click="vm.sortType = 'phonenumber';vm.sortReverse=!vm.sortReverse">
+                  Phone Number
+                <span ng-show="vm.sortType == 'phonenumber' && !vm.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="vm.sortType == 'phonenumber' && vm.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              </a>
+        </td>
+        <td>
+          <a  ng-click="vm.sortType = 'address';vm.sortReverse=!vm.sortReverse">
+                  Address
+                <span ng-show="vm.sortType == 'address' && !vm.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="vm.sortType == 'address' && vm.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              </a>
+        </td>
+        <td class="printme">
+          Action
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in vm.accountdetails | orderBy:vm.sortType:vm.sortReverse">
+        <td>{{ item.accoutName }}</td>
+        <td>{{ item.accountNumber }}</td>
+        <td>{{ item.phoneNumber }}</td>
+        <td>{{ item.address }}</td>
+        <td class="printme">
+          <a ng-click="vm.go(item.accountDetailsId)" class="btn btn-info"><i class="glyphicon glyphicon-edit"></i></a>
+          <button type="button" class="btn btn-danger" ng-click="vm.delete(item.accountDetailsId)"><i class="glyphicon glyphicon-remove-circle"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="printme paddingLeft-15px" class="printme">
+    Showing {{(vm.options.pageSize*vm.options.page)-vm.options.pageSize+1}} to {{(vm.options.pageSize*vm.options.page)-vm.options.pageSize+vm.accountdetails.length}}
+    of total {{vm.options.totalItems}} entries
+  </div>
+  <div class="printme col-lg-12 col-md-12 col-sm-8 col-sm-3 col-xs-12 printme">
+    <uib-pagination total-items="vm.options.totalItems" max-size="vm.pageSize" boundary-links="true" items-per-page="vm.options.pageSize"
+      ng-model="vm.options.page" ng-change="vm.getAccoutDetails()"></uib-pagination>
+  </div>
+
+</div>
+
+</div>

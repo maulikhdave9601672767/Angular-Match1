@@ -1,0 +1,161 @@
+<div class="container margin-top-54">
+  <div class="row" style="margin-bottom:15px;">
+    <div class="printme pull-right">
+      <a ui-sref="secure.transaction.edit" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add New</a>
+      <a ng-click="vm.printme()" ng-if="vm.transactiondetails.length>0" style="margin-left:10px;" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-print"></i> Print</a>
+
+    </div>
+  </div>
+
+  <div class="row printme operation-bar">
+
+    <label class="col-md-1" style="padding-top:7px;text-align:right;">Work Type:</label>
+    <div class="col-md-2 printme">
+      <select name="worktype" class="form-control" ng-options="wrktyp.workTypeId as wrktyp.workTypeName for wrktyp in vm.workTypelist"
+        ng-model="vm.workTypeId" ng-change="vm.search()">
+    <option value="">---Please select---</option>
+   </select>
+    </div>
+    <label class="col-md-2" style="padding-top:7px;text-align:right;">Account:</label>
+    <div class="col-md-2 printme">
+      <select name="accountdetails" class="form-control" ng-options="acc.accountDetailsId as acc.accoutName for acc in vm.accountDetailsList"
+        ng-model="vm.accountDetailsId" ng-change="vm.search()">
+    <option value="">---Please select---</option>
+   </select>
+    </div>
+    <label class="col-md-1" style="padding-top:7px;text-align:right;">Search:</label>
+    <div class="col-md-4 printme">
+      <div class="input-group">
+        <input class="form-control" ng-model="vm.searchText" placeholder="Search" type="search" ng-change="vm.search()" />
+        <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+
+    <div class="pull-right" style="margin-top:10px;">
+      <label class="pull-left printme" style="padding-top:7px;padding-right:5px;">PageSize:</label>
+      <div class="printme pull-left">
+        <select class="form-control" ng-model="vm.options.pageSize" ng-change="vm.search()">
+      <option value="10">10</option>
+      <option value="30">30</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+      <option value="100">500</option>
+      <option value="100">1000</option>
+    </select>
+      </div>
+    </div>
+
+  </div>
+  <div ng-if="vm.transactiondetails.length==0" class="row">
+    <p class="no-records"><br/>
+      <span style="padding-top:10px;">  No Record found(s).</span>
+    </p>
+  </div>
+  <div class="row">
+   <h3 class="text-center"><strong>Zadon Technologies Sikar, Rajasthan</strong></h3>
+  </div>
+  <div class="row" style="margin-top:15px;" ng-if="vm.transactiondetails.length>0">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>
+            <a ng-click="vm.sortType = 'name'; vm.sortReverse = !vm.sortReverse">
+                <b>Account Name</b>
+                <span ng-show="vm.sortType == 'name' && !vm.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="vm.sortType == 'name' && vm.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              </a>
+            </th>
+          <th>
+            <a ng-click="vm.sortType = 'workType'; vm.sortReverse = !vm.sortReverse">
+               <b>Work Type</b>
+                <span ng-show="vm.sortType == 'workType' && !vm.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="vm.sortType == 'workType' && vm.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              </a>
+            </th>
+          <th>
+            <a ng-click="vm.sortType = 'transactionType'; vm.sortReverse = !vm.sortReverse">
+               <b>Trasnaction Type</b>
+                <span ng-show="vm.sortType == 'transactionType' && !vm.sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="vm.sortType == 'transactionType' && vm.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              </a>
+            </th>
+          <th>
+            <a ng-click="vm.sortType = 'amount'; vm.sortReverse = !vm.sortReverse">
+               <b>Amount (INR)</b>
+                <span ng-show="vm.sortType == 'amount' && !vm.sortReverse" class="glyphicon glyphicon-chevron-down "></span>
+                  <span ng-show="vm.sortType == 'amount' && vm.sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              </a>
+            </th>
+
+          <th class="printme">
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in vm.transactiondetails | orderBy:vm.sortType:vm.sortReverse">
+          <td>{{ item.accountName }}</td>
+          <td>{{ item.workTypeName }}</td>
+          <td>{{ item.transactionType }}</td>
+          <td>{{ item.amount }}</td>
+
+
+          <td class="printme">
+            <a ng-click="vm.go(item.transactionDetailsId)" class="btn btn-info"><i class="glyphicon glyphicon-edit"></i></a>
+            <button type="button" class="btn btn-danger" ng-click="vm.delete(item.transactionDetailsId)"><i class="glyphicon glyphicon-remove-circle"></i></button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr ng-repeat="item in vm.transactionProfitLossdetails">
+          <th colspan="3">Total {{ item.transactionType }}</th>
+          <th colspan="2">{{ item.totalAmount|currency : '₹' : 2}}</th>
+        </tr>
+        <tr>
+            <th colspan="3">Grand Total</th>
+            <th colspan="2">{{ vm.total()|currency : '₹' : 2}}</th>
+          </tr>
+          <!-- <tr>
+            <th colspan="3">Total Profit/Loss</th>
+            <th colspan="2">{{ vm.total()|currency : '₹' : 2}}</th>
+          </tr> -->
+      </tfoot>
+    </table>
+    <div class="printme paddingLeft-15px text-center">
+      Showing {{(vm.options.pageSize*vm.options.page)-vm.options.pageSize+1}} to {{(vm.options.pageSize*vm.options.page)-vm.options.pageSize+vm.transactiondetails.length}}
+      of total {{vm.options.totalItems}} entries
+    </div>
+    <div class="printme col-lg-12 col-md-12 col-sm-8 col-sm-3 col-xs-12 text-center">
+      <uib-pagination total-items="vm.options.totalItems" max-size="vm.pageSize" boundary-links="true" items-per-page="vm.options.pageSize"
+        ng-model="vm.options.page" ng-change="vm.getTransaction()"></uib-pagination>
+    </div>
+    <!-- <div class="pull-left">
+      <h4>Transaction Type Details</h4>
+    </div> -->
+  </div>
+
+  <!-- <div class="row" style="margin-top:15px;" ng-if="vm.transactionProfitLossdetails.length>0">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <td>
+            <strong> Transaction Type</strong>
+          </td>
+          <td>
+            <strong> Total Amount</strong>
+          </td>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in vm.transactionProfitLossdetails">
+          <td>{{ item.transactionType }}</td>
+          <td>{{ item.totalAmount }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div> -->
+</div>
